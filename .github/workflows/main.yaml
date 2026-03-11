@@ -1,0 +1,45 @@
+name: KMeans MLOps Pipeline
+
+on:
+  push:
+    branches: [main]
+
+env:
+  IMAGE_NAME: kmeans-mlops-pipeline
+  PYTHON_VERSION: "3.10"
+
+
+jobs:
+    Test-and-build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout Code
+              uses: actions/checkout@v3
+            
+            - name: Setup Python
+              uses: actions/setup-python@v4
+              with: 
+                python-version: ${{ env.PYTHON_VERSION }}
+            
+            - name: running for the dependencies
+              uses: actions/cache@v3
+              with:
+                path: ~/.cache/pip
+                key: ${{runner.os}}-pip-${{hashFiles('requirements.txt')}}
+            
+            - name: hitting install req
+              run : pip install -r requirements.txt
+            
+            - name: running for train.py
+              run: python train.py
+            
+            - name: building the docker image
+              run: |
+                docker build \
+                  -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest \
+                  -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
+                  .
+            
+
+
+              
