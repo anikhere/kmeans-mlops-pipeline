@@ -23,8 +23,6 @@ class Kmeans:
            movement = np.max(np.abs(self.centroid - old_centroid))
            if movement < self.tol:
               break
-
-
     
     def assign(self,X:np.array):
         labels = []
