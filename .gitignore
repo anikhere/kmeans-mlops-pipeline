@@ -1,0 +1,21 @@
+kmeans-venv/
+Logistic_scratch/
+linear_regression.py
+knn_from_scratch/
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# ML artifacts
+*.png
+*.pkl
+*.csv
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
