@@ -3,6 +3,7 @@ from aws_setup import upload_to_s3
 from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
 import numpy as np
+
 import os
 X, _ = make_blobs(n_samples=100, centers=3, random_state=42)
 model = Kmeans(max_iter=100,k=3,tol=0.0001)
