@@ -21,6 +21,6 @@ plt.savefig("outputs/results.png")
 print("Plot saved as results.png")
 upload_to_s3(
     local_file='outputs/results.png',
-    bucket_name='k-means-mlops-bucket-user',
+    bucket_name='kmeans-mlops-bucket-user',
     s3_file_name='outputs/results.png'
 )
