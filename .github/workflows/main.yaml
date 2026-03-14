@@ -31,7 +31,14 @@ jobs:
               run : pip install -r requirements.txt
             
             - name: running for train.py
+              env:
+                 AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                 AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                 AWS_REGION: ap-south-1
               run: python train.py
+
+              
+
             
             - name: building the docker image
               run: |
@@ -65,14 +72,7 @@ jobs:
             docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} 
             
 
-        - name: pushing to aws cloud
-          env:
-             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-             AWS_REGION: ap-south-1
-          run: |
-            python train.py
-            python aws_setup.py
+
 
 
               
